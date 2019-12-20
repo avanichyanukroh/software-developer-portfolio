@@ -5,7 +5,15 @@ class Tilt extends Component {
 		super(props)
 		
 		this.state = {
-			style: {}
+			style: {
+                height: '500px',
+                width: 'auto',
+                backgroundImage: `url(${this.props.backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                borderRadius: '0px',
+                borderWidth: '0px'
+            }
 		}
 
 		const defaultSettings = {

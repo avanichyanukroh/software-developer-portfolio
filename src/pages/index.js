@@ -1,146 +1,180 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
+import React, { useState, useLayoutEffect } from 'react';
+// import { Link } from 'gatsby';
 
 import Layout from '../components/layout';
-import Image from '../components/image';
-import SEO from '../components/seo';
+// import Image from '../components/image';
+// import SEO from '../components/seo';
 
 import Tilt from '../components/Tilt';
 import iphone from '../images/iphone-mockup.png';
 import flashbackApp from '../images/flashback-app.jpg';
 import comicBackground from '../images/comic-background.jpg';
+import Button from '../components/Button';
+import Navbar from '../components/Navbar';
+import HeroBackground from '../components/HeroBackground';
+
+const projectRef1 = React.createRef();
+const navbarRef = React.createRef();
+const portfolioRef = React.createRef();
 
 const IndexPage = () => {
 
+    const [animProj1, setAnimProj1] = useState(false);
+    const [navbarSticky, setNavbarSticky] = useState(false);
+    const [gradientLayer, setGradientLayer] = useState({0: true, 1: false});
+
+    useLayoutEffect(() => {
+        const navbar = navbarRef.current.offsetHeight;
+        const project1 = projectRef1.current.offsetHeight;
+        const porfolio = portfolioRef.current.offsetHeight;
+
+        const handleScroll = () => {
+            if (window.scrollY >= window.innerHeight - navbar) {
+                setNavbarSticky(true);
+            }
+            else {
+                setNavbarSticky(false);
+            }
+
+            if (window.scrollY > porfolio) {
+                setGradientLayer(prevState => { return {...prevState, 1: true}});
+            }
+            else {
+                setGradientLayer(prevState => { return {...prevState, 1: false}});
+            }
+
+            if (window.scrollY > project1) {
+                setAnimProj1(true);
+            }
+
+        }
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
 
     return (
         <Layout>
-            {console.log('test',  window.innerWidth-100)}
-            <SEO title='Home' />
-            <h1>Hi people</h1>
-            <p>Welcome to your new Gatsby site.</p>
-            <p>Now go build something great.</p>
-            <div style={{ maxWidth: '300px' }}>
-            <Image />
-            <Link to="/page-2/">Go to page 2</Link>
+            {/* <SEO title='Home' /> */}
+            <div className="gradient-background-0" />
+            <div
+                className={
+                    gradientLayer[1] ?
+                    'gradient-background-1 gradientFadeIn'
+                    :
+                    'gradient-background-1 gradientFadeOut'
+                }
+            />
+            <div className="hero-container">
+                <HeroBackground />
+                <Navbar navbarSticky={navbarSticky} ref={navbarRef} />
             </div>
-            <div style={{marginTop: '500px', marginBottom: '500px'}}>
-                <div>
-                    <div
+            <div
+                style={{
+                    marginTop: '250px',
+                    marginBottom: '250px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    maxWidth: 960,
+                    padding: `0px 1.0875rem 1.45rem`,
+                    paddingTop: 0,
+                }}
+            >
+                <div ref={portfolioRef}>
+                    <h1
                         style={{
-                            // display: 'flex',
-                            // alignItems: 'center',
-                            // justifyContent: 'center',
-                            width: 400,
-                            position: 'relative',
-                            top: 200,
-                            bottom: 0,
-                            left: -200,
-                            zIndex: 40,
-                            marginTop: 'auto',
-                            marginBottom: 'auto',
-                            border: '1px solid green'
+                            color: 'white',
+                            fontFamily: 'Roboto, sans-serif',
                         }}
                     >
-                        <h1
+                        PORTFOLIO
+                    </h1>
+                    
+                    <div ref={projectRef1}>
+                        <h2
+                            className={animProj1 ? 'fadeIn' : 'hidden'}
                             style={{
                                 color: 'white',
-                                fontSize: 72,
-                                textShadow: '2px 2px black'
+                                fontSize: '3em',
+                                textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
+                                fontFamily: `"Roboto", sans-serif`,
+                                textTransform: 'uppercase',
+                                display: 'inline-block',
+                                position: 'relative',
+                                top: 250,
+                                bottom: 0,
+                                left: -50,
+                                zIndex: 40
                             }}
                         >
                             Flashback
-                        </h1>
-                        <button
+                        </h2>
+                        <Button
+                            text="View Project"
+                            textColor="white"
+                            backgroundColor="#c70d3a"
+                            animationStart={animProj1}
                             style={{
-                                padding: '8px 24px',
-                                color: 'white',
-                                backgroundColor: 
+                                position: 'relative',
+                                top: 300,
+                                bottom: 0,
+                                left: -355,
+                                zIndex: 40
                             }}
+                        />
+                        <Tilt
+                            className={animProj1 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
+                            backgroundImage={comicBackground}
                         >
-                            View Project
-                        </button>
-                    </div>
-                    <Tilt
-                        className="parallax-effect"
-                        style={{
-                            height: '450px',
-                            width: 'auto',
-                            backgroundImage: `url(${comicBackground})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center center',
-                            borderRadius: 1
-                        }}
-                    >
-                        <div className="inner-element">
-                            <div
-                                style={{
-                                    height: '500px', 
-                                    width: '800px',
-                                    position: 'relative',
-                                    bottom: 32,
-                                    left: 0,
-                                    overflow: 'hidden'
-                                }}
-                            >
-                                <img
-                                    src={iphone}
+                            <div className="inner-element">
+                                <div
                                     style={{
-                                        height: '100%', 
-                                        width: 'auto',
-                                        position: 'absolute',
-                                        bottom: 0,
+                                        height: '500px', 
+                                        width: '800px',
+                                        position: 'relative',
+                                        bottom: 32,
                                         left: 0,
-                                        right: 0,
-                                        zIndex: 20,
-                                        marginLeft: 'auto',
-                                        marginRight: 'auto'
+                                        overflow: 'hidden'
                                     }}
-                                />
-                                <img
-                                    src={flashbackApp}
-                                    style={{
-                                        height: '375px',
-                                        width: 'auto',
-                                        position: 'absolute',
-                                        bottom: 38,
-                                        left: 0,
-                                        right: 8,
-                                        zIndex: 10,
-                                        marginLeft: 'auto',
-                                        marginRight: 'auto',
-                                        borderRadius: 8
-                                    }}
-                                />
+                                >
+                                    <img
+                                        src={iphone}
+                                        alt="i phone"
+                                        style={{
+                                            height: '100%', 
+                                            width: 'auto',
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            zIndex: 20,
+                                            marginLeft: 'auto',
+                                            marginRight: 'auto'
+                                        }}
+                                    />
+                                    <img
+                                        src={flashbackApp}
+                                        alt="flashback app"
+                                        style={{
+                                            height: '375px',
+                                            width: 'auto',
+                                            position: 'absolute',
+                                            bottom: 38,
+                                            left: 0,
+                                            right: 8,
+                                            zIndex: 10,
+                                            marginLeft: 'auto',
+                                            marginRight: 'auto',
+                                            borderRadius: 8
+                                        }}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    </Tilt>
-                </div>
-                
-            </div>
-            <div style={{marginTop: '500px', marginBottom: '500px'}}>
-                <Tilt
-                    tiltMaxAngleX="37"
-                    tiltMaxAngleY="37"
-                    glareEnable={true}
-                    glareMaxOpacity={0.8}
-                    glareColor="#ffffff"
-                    glarePosition="bottom"
-                >
-                    <div
-                        style={{
-                            height: '300px',
-                            width: 'auto',
-                            backgroundImage: `url(${comicBackground})`,
-                        }}
-                    >
-                        
+                        </Tilt>
                     </div>
-                </Tilt>
+                    
+                </div>
             </div>
-            
-            
-
         </Layout>
     )
 }

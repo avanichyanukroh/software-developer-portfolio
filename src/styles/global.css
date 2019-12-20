@@ -1,5 +1,45 @@
 html {
-    background-color: black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.gradient-background-0 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:-40;
+    height: 100vh;
+    width: 100vw;
+    background: #0F2027;
+    background: -webkit-linear-gradient(45%, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(45%, #2C5364, #203A43, #0F2027);
+    opacity: 1;
+}
+
+.gradient-background-1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:-30;
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    background: -webkit-linear-gradient(45%, black, black, black);
+    background: linear-gradient(45%, black, black, black);
+    opacity: 0;
+}
+
+.gradientFadeIn {
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+    animation-name: fadeIn;
+}
+
+.gradientFadeOut {
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+    animation-name: fadeOut;
 }
 
 .parallax-effect {
@@ -21,4 +61,131 @@ html {
     font-style: italic;
     color: white;
     transform: translateZ(60px);
+}
+
+.fadeIn {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+    -webkit-animation-name: fadeIn;
+    -moz-animation-name: fadeIn;
+    animation-name: fadeIn;
+
+    -webkit-animation-delay: 0.5s;
+    -moz-animation-delay:0.5s;
+    animation-delay: 0.5s;
+}
+
+ .growIn {
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+
+    -webkit-animation-name: growIn;
+    -moz-animation-name: growIn;
+    animation-name: growIn;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.shrunk {
+    transform: scale(0);
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+ 
+ @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+ 
+ @keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+ 
+ @keyframes growIn {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+}
+
+@-webkit-keyframes growIn {
+    from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+}
+
+.hero-container {
+	text-align: center;
+	color: #FFF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+    letter-spacing: 1px;
+    width: 100vw;
+    max-width: 100%;
+    /* background: #0F2027;
+    background: -webkit-linear-gradient(45%, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(45%, #2C5364, #203A43, #0F2027); */
+}
+
+.hero-text {
+	background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+	background-size: cover;
+    color: transparent;
+    background-clip: text;
+	-moz-background-clip: text;
+	-webkit-background-clip: text;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 7vw;
+	line-height: .75;
+    margin: 10px 0;
+    margin: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    position: -webkit-relative;
+    position: relative;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-sticky {
+    display: flex;
+    justify-content: center;
+    font-family: Montserrat, sans-serif;
+    text-transform: uppercase;
+    position: -webkit-sticky;
+    position: fixed;
+    top: 0;
+    z-index: 100;
 }

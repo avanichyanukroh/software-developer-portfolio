@@ -9,26 +9,42 @@ import Tilt from '../components/Tilt';
 import iphone from '../images/iphone-mockup.png';
 import flashbackApp from '../images/flashback-app.jpg';
 import comicBackground from '../images/comic-background.jpg';
+import battleFieldBackground from '../images/battlefield-5-banner.jpg';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import HeroBackground from '../components/HeroBackground';
 
 const projectRef1 = React.createRef();
+const projectRef2 = React.createRef();
 const navbarRef = React.createRef();
 const portfolioRef = React.createRef();
 
 const IndexPage = () => {
 
     const [animProj1, setAnimProj1] = useState(false);
+    const [animProj2, setAnimProj2] = useState(false);
     const [navbarSticky, setNavbarSticky] = useState(false);
     const [gradientLayer, setGradientLayer] = useState({0: true, 1: false});
 
     useLayoutEffect(() => {
         const navbar = navbarRef.current.offsetHeight;
-        const project1 = projectRef1.current.offsetHeight;
-        const porfolio = portfolioRef.current.offsetHeight;
+        let portfolio = portfolioRef.current;
+        let project1 = projectRef1.current;
+        let project2 = projectRef2.current;
+
+        const isFullyVisible = (el) => {
+            const elBound = el.getBoundingClientRect();
+
+            const top = elBound.top;
+            const bottom = elBound.bottom;
+
+            return ((top >= 0) && (bottom <= window.innerHeight));
+        }
+
+
 
         const handleScroll = () => {
+            console.log(window.scrollY, isFullyVisible(portfolio));
             if (window.scrollY >= window.innerHeight - navbar) {
                 setNavbarSticky(true);
             }
@@ -36,15 +52,19 @@ const IndexPage = () => {
                 setNavbarSticky(false);
             }
 
-            if (window.scrollY > porfolio) {
+            if (isFullyVisible(portfolio)) {
                 setGradientLayer(prevState => { return {...prevState, 1: true}});
             }
             else {
                 setGradientLayer(prevState => { return {...prevState, 1: false}});
             }
 
-            if (window.scrollY > project1) {
+            if (isFullyVisible(project1)) {
                 setAnimProj1(true);
+            }
+
+            if (isFullyVisible(project2)) {
+                setAnimProj2(true);
             }
 
         }
@@ -80,8 +100,9 @@ const IndexPage = () => {
                     paddingTop: 0,
                 }}
             >
-                <div ref={portfolioRef}>
+                <div>
                     <h1
+                        ref={portfolioRef}
                         style={{
                             color: 'white',
                             fontFamily: 'Roboto, sans-serif',
@@ -90,7 +111,12 @@ const IndexPage = () => {
                         PORTFOLIO
                     </h1>
                     
-                    <div ref={projectRef1}>
+                    <div
+                        ref={projectRef1}
+                        style={{
+                            marginBottom: '250px'
+                        }}
+                    >
                         <h2
                             className={animProj1 ? 'fadeIn' : 'hidden'}
                             style={{
@@ -168,6 +194,105 @@ const IndexPage = () => {
                                             borderRadius: 8
                                         }}
                                     />
+                                </div>
+                            </div>
+                        </Tilt>
+                    </div>
+
+                    <div ref={projectRef2}>
+                        <h2
+                            className={animProj2 ? 'fadeIn' : 'hidden'}
+                            style={{
+                                color: 'white',
+                                fontSize: '3em',
+                                textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
+                                fontFamily: `"Roboto", sans-serif`,
+                                textTransform: 'uppercase',
+                                display: 'inline-block',
+                                position: 'relative',
+                                top: 250,
+                                bottom: 0,
+                                left: -50,
+                                zIndex: 40
+                            }}
+                        >
+                            Warp Zone
+                        </h2>
+                        <Button
+                            text="View Project"
+                            textColor="white"
+                            backgroundColor="#c70d3a"
+                            animationStart={animProj2}
+                            style={{
+                                position: 'relative',
+                                top: 300,
+                                bottom: 0,
+                                left: -355,
+                                zIndex: 40
+                            }}
+                        />
+                        <Tilt
+                            className={animProj2 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
+                            backgroundImage={battleFieldBackground}
+                        >
+                            <div className="inner-element">
+                                <div
+                                    style={{
+                                        height: '500px', 
+                                        width: '800px',
+                                        position: 'relative',
+                                        bottom: 32,
+                                        left: 0,
+                                        overflow: 'hidden'
+                                    }}
+                                >
+                                    <h3
+                                        style={{
+                                            display: 'inline-block',
+                                            position: 'absolute',
+                                            top: '50%',
+                                            left: 0,
+                                            right: 0,
+                                            zIndex: 20,
+                                            marginLeft: 'auto',
+                                            marginRight: 'auto',
+                                            textAlign: 'center',
+                                            color: '#f9ca24'
+                                        }}
+                                    >
+                                        Discover Your Next Game
+                                    </h3>
+                                    {/* <img
+                                        src={iphone}
+                                        alt="i phone"
+                                        style={{
+                                            height: '100%', 
+                                            width: 'auto',
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            zIndex: 20,
+                                            marginLeft: 'auto',
+                                            marginRight: 'auto'
+                                        }}
+                                    />
+                                    <img
+                                        src={flashbackApp}
+                                        alt="flashback app"
+                                        style={{
+                                            height: '375px',
+                                            width: 'auto',
+                                            position: 'absolute',
+                                            bottom: 38,
+                                            left: 0,
+                                            right: 8,
+                                            zIndex: 10,
+                                            marginLeft: 'auto',
+                                            marginRight: 'auto',
+                                            borderRadius: 8
+                                        }}
+                                    /> */}
                                 </div>
                             </div>
                         </Tilt>

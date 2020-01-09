@@ -8,7 +8,7 @@ class Tilt extends Component {
 			style: {
                 height: '500px',
                 width: 'auto',
-                backgroundImage: `url(${this.props.backgroundImage})`,
+                backgroundImage: this.props.isDarken ? `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${this.props.backgroundImage})` : `url(${this.props.backgroundImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 borderRadius: '0px',

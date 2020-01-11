@@ -14,6 +14,9 @@ import brickWallBackground from '../images/brick-wall-background.jpg';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import HeroBackground from '../components/HeroBackground';
+import ProjectDetail from '../components/ProjectDetail';
+
+import { flashBack, warpZone, flavorous } from '../projectData';
 
 const projectRef1 = React.createRef();
 const projectRef2 = React.createRef();
@@ -28,6 +31,17 @@ const IndexPage = () => {
     const [animProj3, setAnimProj3] = useState(false);
     const [navbarSticky, setNavbarSticky] = useState(false);
     const [gradientLayer, setGradientLayer] = useState({0: true, 1: false});
+    const [isProjectDetail, setProjectDetail] = useState({0: false, 1: false, 2: false});
+
+    const handleProjectDetailClick = (project) => {
+        console.log('click', project);
+        setProjectDetail(prevState => { return {...prevState, [project]: true}})
+    }
+
+    const handleProjectDetailClose = (project) => {
+        console.log('click', project);
+        setProjectDetail(prevState => { return {...prevState, [project]: false}})
+    }
 
     useLayoutEffect(() => {
         const navbar = navbarRef.current.offsetHeight;
@@ -55,7 +69,6 @@ const IndexPage = () => {
         }
 
         const handleScroll = () => {
-            console.log(window.scrollY, isFullyVisible(portfolio));
             if (window.scrollY >= window.innerHeight - navbar) {
                 setNavbarSticky(true);
             }
@@ -126,100 +139,115 @@ const IndexPage = () => {
                         PORTFOLIO
                     </h1>
                     
+                    {/* Project 1 */}
                     <div
                         ref={projectRef1}
                         style={{
-                            marginBottom: '500px'
+                            marginBottom: '500px',
+                            position: 'relative'
                         }}
                     >
-                        <h2
-                            className={animProj1 ? 'fadeIn' : 'hidden'}
-                            style={{
-                                color: 'white',
-                                fontSize: '3em',
-                                textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
-                                fontFamily: `"Roboto", sans-serif`,
-                                textTransform: 'uppercase',
-                                display: 'inline-block',
-                                position: 'relative',
-                                top: 250,
-                                bottom: 0,
-                                left: -50,
-                                zIndex: 40
-                            }}
-                        >
-                            Flashback
-                        </h2>
-                        <Button
-                            text="View Project"
-                            textColor="white"
-                            backgroundColor="#c70d3a"
-                            animationStart={animProj1}
-                            style={{
-                                position: 'relative',
-                                top: 300,
-                                bottom: 0,
-                                left: -355,
-                                zIndex: 40
-                            }}
-                        />
-                        <Tilt
-                            className={animProj1 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
-                            backgroundImage={comicBackground}
-                        >
-                            <div className="inner-element">
-                                <div
-                                    style={{
-                                        height: '500px', 
-                                        width: '800px',
-                                        position: 'relative',
-                                        bottom: 32,
-                                        left: 0,
-                                        overflow: 'hidden'
-                                    }}
-                                >
-                                    <img
-                                        src={iphone}
-                                        alt="i phone"
+                        <div className={isProjectDetail[0] ? 'fadeOut' : 'fadeIn'}>
+                            <h2
+                                className={animProj1 ? 'fadeIn' : 'hidden'}
+                                style={{
+                                    color: 'white',
+                                    fontSize: '3em',
+                                    textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
+                                    fontFamily: `"Roboto", sans-serif`,
+                                    textTransform: 'uppercase',
+                                    display: 'inline-block',
+                                    position: 'relative',
+                                    top: 250,
+                                    bottom: 0,
+                                    left: -50,
+                                    zIndex: 40
+                                }}
+                            >
+                                Flashback
+                            </h2>
+                            <Button
+                                text="View Project"
+                                textColor="white"
+                                backgroundColor="#c70d3a"
+                                animationStart={animProj1}
+                                style={{
+                                    position: 'relative',
+                                    top: 300,
+                                    bottom: 0,
+                                    left: -355,
+                                    zIndex: 40
+                                }}
+                                onClick={() => handleProjectDetailClick(0)}
+                            />
+                            <Tilt
+                                className={animProj1 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
+                                backgroundImage={comicBackground}
+                            >
+                                <div className="inner-element">
+                                    <div
                                         style={{
-                                            height: '100%', 
-                                            width: 'auto',
-                                            position: 'absolute',
-                                            bottom: 0,
+                                            height: '500px', 
+                                            width: '800px',
+                                            position: 'relative',
+                                            bottom: 32,
                                             left: 0,
-                                            right: 0,
-                                            zIndex: 20,
-                                            marginLeft: 'auto',
-                                            marginRight: 'auto'
+                                            overflow: 'hidden'
                                         }}
-                                    />
-                                    <img
-                                        src={flashbackApp}
-                                        alt="flashback app"
-                                        style={{
-                                            height: '375px',
-                                            width: 'auto',
-                                            position: 'absolute',
-                                            bottom: 38,
-                                            left: 0,
-                                            right: 8,
-                                            zIndex: 10,
-                                            marginLeft: 'auto',
-                                            marginRight: 'auto',
-                                            borderRadius: 8
-                                        }}
-                                    />
+                                    >
+                                        <img
+                                            src={iphone}
+                                            alt="i phone"
+                                            style={{
+                                                height: '100%', 
+                                                width: 'auto',
+                                                position: 'absolute',
+                                                bottom: 0,
+                                                left: 0,
+                                                right: 0,
+                                                zIndex: 20,
+                                                marginLeft: 'auto',
+                                                marginRight: 'auto'
+                                            }}
+                                        />
+                                        <img
+                                            src={flashbackApp}
+                                            alt="flashback app"
+                                            style={{
+                                                height: '375px',
+                                                width: 'auto',
+                                                position: 'absolute',
+                                                bottom: 38,
+                                                left: 0,
+                                                right: 8,
+                                                zIndex: 10,
+                                                marginLeft: 'auto',
+                                                marginRight: 'auto',
+                                                borderRadius: 8
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        </Tilt>
+                            </Tilt>
+                        </div>
+                        <ProjectDetail
+                            className={isProjectDetail[0] ? 'project-detail-container slideIn' : 'project-detail-container slideOut'}
+                            handleProjectDetailClose={() => handleProjectDetailClose(0)}
+                            title={flashBack.title}
+                            description={flashBack.description}
+                            technology={flashBack.technology}
+                        />
                     </div>
 
+                    {/* Project 2 */}
                     <div
                         ref={projectRef2}
                         style={{
-                            marginBottom: '500px'
+                            marginBottom: '500px',
+                            position: 'relative'
                         }}
                     >
+                        <div className={isProjectDetail[1] ? 'fadeOut' : 'fadeIn'}>
                         {/* <h2
                             className={animProj2 ? 'fadeIn' : 'hidden'}
                             style={{
@@ -238,128 +266,149 @@ const IndexPage = () => {
                         >
                             Warp Zone
                         </h2> */}
-                        <Button
-                            text="View Project"
-                            textColor="white"
-                            backgroundColor="#c70d3a"
-                            animationStart={animProj2}
-                            style={{
-                                position: 'relative',
-                                top: 600,
-                                left: 770,
-                                zIndex: 40
-                            }}
-                        />
-                        <Tilt
-                            className={animProj2 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
-                            backgroundImage={battleFieldBackground}
-                        >
-                            <div className="inner-element">
-                                <div
-                                    style={{
-                                        height: '500px', 
-                                        width: '800px',
-                                        position: 'relative',
-                                        bottom: 32,
-                                        left: 0,
-                                        overflow: 'hidden'
-                                    }}
-                                >
-                            <h2
+                            <Button
+                                text="View Project"
+                                textColor="white"
+                                backgroundColor="#c70d3a"
+                                animationStart={animProj2}
                                 style={{
-                                    fontSize: '2em',
-                                    textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
-                                    fontFamily: `"Roboto", sans-serif`,
-                                    textTransform: 'uppercase',
-                                    display: 'inline-block',
-                                    zIndex: 40,
-                                    color: '#f9ca24',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto'
+                                    position: 'relative',
+                                    top: 600,
+                                    left: 770,
+                                    zIndex: 40
                                 }}
+                                onClick={() => handleProjectDetailClick(1)}
+                            />
+                            <Tilt
+                                className={animProj2 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
+                                backgroundImage={battleFieldBackground}
                             >
-                                Warp Zone
-                            </h2>
-                                    <h3
+                                <div className="inner-element">
+                                    <div
                                         style={{
-                                            display: 'inline-block',
-                                            position: 'absolute',
-                                            top: '50%',
+                                            height: '500px', 
+                                            width: '800px',
+                                            position: 'relative',
+                                            bottom: 32,
                                             left: 0,
-                                            right: 0,
-                                            zIndex: 20,
-                                            marginLeft: 'auto',
-                                            marginRight: 'auto',
-                                            textAlign: 'center',
-                                            color: 'white',
-                                            textShadow: '2px 4px 3px rgba(0,0,0,0.75)'
+                                            overflow: 'hidden'
                                         }}
                                     >
-                                        Discover Your Next Game
-                                    </h3>
+                                <h2
+                                    style={{
+                                        fontSize: '2em',
+                                        textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
+                                        fontFamily: `"Roboto", sans-serif`,
+                                        textTransform: 'uppercase',
+                                        display: 'inline-block',
+                                        zIndex: 40,
+                                        color: '#c70d3a',
+                                        marginLeft: 'auto',
+                                        marginRight: 'auto'
+                                    }}
+                                >
+                                    Warp Zone
+                                </h2>
+                                        <h3
+                                            style={{
+                                                display: 'inline-block',
+                                                position: 'absolute',
+                                                top: '50%',
+                                                left: 0,
+                                                right: 0,
+                                                zIndex: 20,
+                                                marginLeft: 'auto',
+                                                marginRight: 'auto',
+                                                textAlign: 'center',
+                                                color: 'white',
+                                                textShadow: '2px 4px 3px rgba(0,0,0,0.75)'
+                                            }}
+                                        >
+                                            Discover Your Next Game
+                                        </h3>
+                                    </div>
                                 </div>
-                            </div>
-                        </Tilt>
+                            </Tilt>
+                        </div>
+                        <ProjectDetail
+                                className={isProjectDetail[1] ? 'project-detail-container slideIn' : 'project-detail-container slideOut'}
+                                handleProjectDetailClose={() => handleProjectDetailClose(1)}
+                                title={warpZone.title}
+                                description={warpZone.description}
+                                technology={warpZone.technology}
+                            />
                     </div>
-                    
+
+                    {/* Project 3 */}
                     <div
                         ref={projectRef3}
                         style={{
-                            marginBottom: '500px'
+                            marginBottom: '500px',
+                            position: 'relative'
                         }}
                     >
-                        <h2
-                            className={animProj3 ? 'fadeIn' : 'hidden'}
-                            style={{
-                                color: 'white',
-                                fontSize: '1.5em',
-                                textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
-                                fontFamily: `"Roboto", sans-serif`,
-                                display: 'inline-block',
-                                position: 'relative',
-                                top: 250,
-                                bottom: 0,
-                                left: 64,
-                                zIndex: 40
-                            }}
-                        >
-                            What are YOU watching next?
-                        </h2>
-                        <Button
-                            text="View Project"
-                            textColor="white"
-                            backgroundColor="#c70d3a"
-                            animationStart={animProj3}
-                            style={{
-                                position: 'relative',
-                                top: 300,
-                                bottom: 0,
-                                left: -200,
-                                zIndex: 40
-                            }}
-                        />
-                        <Tilt
-                            className={animProj3 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
-                            backgroundImage={brickWallBackground}
-                            isDarken
-                        >
-                            <div className="inner-element">
-                                {/* <p>What are YOU watching next?</p> */}
-                                <div
-                                    style={{
-                                        height: '100%',
-                                        width: 'auto',
-                                        position: 'relative',
-                                        top: -100,
-                                        right: -300,
-                                        zIndex: 20
-                                    }}
-                                >
-                                    <h3 className="neon-text">Fla<span className=".neon-anim-offset">v</span>orus</h3>
-                                </div>
+                        <div className={isProjectDetail[2] ? 'fadeOut' : 'fadeIn'}>
+                            <h2
+                                className={animProj3 ? 'fadeIn' : 'hidden'}
+                                style={{
+                                    color: '#D1D1D1',
+                                    fontSize: '1.5em',
+                                    textShadow: '2px 4px 3px rgba(0,0,0,0.75)',
+                                    fontFamily: `"Oswald", sans-serif`,
+                                    display: 'inline-block',
+                                    position: 'relative',
+                                    top: 250,
+                                    bottom: 0,
+                                    left: 64,
+                                    zIndex: 40
+                                }}
+                            >
+                                What are YOU watching next?
+                            </h2>
+                            <Button
+                                text="View Project"
+                                textColor="white"
+                                backgroundColor="#08f"
+                                animationStart={animProj3}
+                                style={{
+                                    position: 'relative',
+                                    top: 300,
+                                    bottom: 0,
+                                    left: -200,
+                                    zIndex: 40
+                                }}
+                                onClick={() => handleProjectDetailClick(2)}
+                            />
+                            <Tilt
+                                className={animProj3 ? 'growIn parallax-effect' : 'hidden parallax-effect'}
+                                backgroundImage={brickWallBackground}
+                                isDarken
+                            >
+                                <div className="inner-element">
+                                    {/* <p>What are YOU watching next?</p> */}
+                                    <div
+                                        style={{
+                                            height: '100%',
+                                            width: 'auto',
+                                            position: 'relative',
+                                            top: -100,
+                                            right: -300,
+                                            zIndex: 20
+                                        }}
+                                    >
+                                        <h3 className="neon-text">Fla<span className="neon-anim-offset">v</span>orus</h3>
+                                    </div>
 
-                            </div>
-                        </Tilt>
+                                </div>
+                            </Tilt>
+                        </div>
+                        <ProjectDetail
+                            className={isProjectDetail[2] ? 'project-detail-container slideIn' : 'project-detail-container slideOut'}
+                            handleProjectDetailClose={() => handleProjectDetailClose(2)}
+                            title={flavorous.title}
+                            description={flavorous.description}
+                            technology={flavorous.technology}
+                        />
                     </div>
 
                 </div>

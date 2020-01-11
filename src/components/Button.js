@@ -14,6 +14,7 @@ const Button = (props) => {
                 cursor: 'pointer',
                 ...props.style
             }}
+            onClick={props.onClick}
         >
             {props.text}
         </button>

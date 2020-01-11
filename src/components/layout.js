@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
     <>
       {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
       <div>
-        <main>{children}</main>
+        <main style={{overflow: 'hidden'}}>{children}</main>
         {/* <footer>
           © {new Date().getFullYear()}, Built with
           {` `}

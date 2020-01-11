@@ -135,7 +135,7 @@ class Tilt extends Component {
 	render() {
 		const style = {
 			...this.props.style,
-			...this.state.style
+            ...this.state.style
 		}
 		return (
 			<div

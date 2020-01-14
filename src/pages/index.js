@@ -149,7 +149,7 @@ const IndexPage = () => {
                     >
                         <div className={isProjectDetail[0] ? 'fadeOut' : 'fadeIn'}>
                             <h2
-                                className={animProj1 ? 'fadeIn' : 'hidden'}
+                                className={animProj1 ? 'fadeIn fadeInDelay' : 'hidden'}
                                 style={{
                                     color: 'white',
                                     fontSize: '3em',
@@ -214,12 +214,12 @@ const IndexPage = () => {
                                             src={flashbackApp}
                                             alt="flashback app"
                                             style={{
-                                                height: '375px',
+                                                height: '88%',
                                                 width: 'auto',
                                                 position: 'absolute',
-                                                bottom: 38,
+                                                bottom: 24,
                                                 left: 0,
-                                                right: 8,
+                                                right: 9,
                                                 zIndex: 10,
                                                 marginLeft: 'auto',
                                                 marginRight: 'auto',
@@ -231,11 +231,9 @@ const IndexPage = () => {
                             </Tilt>
                         </div>
                         <ProjectDetail
-                            className={isProjectDetail[0] ? 'project-detail-container slideIn' : 'project-detail-container slideOut'}
+                            isProjectDetail={isProjectDetail[0]}
                             handleProjectDetailClose={() => handleProjectDetailClose(0)}
-                            title={flashBack.title}
-                            description={flashBack.description}
-                            technology={flashBack.technology}
+                            projectData={flashBack}
                         />
                     </div>
 
@@ -331,11 +329,9 @@ const IndexPage = () => {
                             </Tilt>
                         </div>
                         <ProjectDetail
-                                className={isProjectDetail[1] ? 'project-detail-container slideIn' : 'project-detail-container slideOut'}
+                                isProjectDetail={isProjectDetail[1]}
                                 handleProjectDetailClose={() => handleProjectDetailClose(1)}
-                                title={warpZone.title}
-                                description={warpZone.description}
-                                technology={warpZone.technology}
+                                projectData={warpZone}
                             />
                     </div>
 
@@ -403,11 +399,9 @@ const IndexPage = () => {
                             </Tilt>
                         </div>
                         <ProjectDetail
-                            className={isProjectDetail[2] ? 'project-detail-container slideIn' : 'project-detail-container slideOut'}
+                            isProjectDetail={isProjectDetail[2]}
                             handleProjectDetailClose={() => handleProjectDetailClose(2)}
-                            title={flavorous.title}
-                            description={flavorous.description}
-                            technology={flavorous.technology}
+                            projectData={flavorous}
                         />
                     </div>
 

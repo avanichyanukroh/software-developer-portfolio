@@ -12,10 +12,10 @@ const Navbar = forwardRef((props, ref) => {
             className={props.navbarSticky ? 'navbar-sticky' : 'navbar'}
             ref={ref}
         >
-            <a href="#" style={styles.links}>About Me</a>
-            <a href="#" style={styles.links}>Portfolio</a>
-            <a href="#" style={styles.links}>Skills</a>
-            <a href="#" style={styles.links}>Contact</a>
+            <a href="#" style={styles.links} className="nav-link">About Me</a>
+            <a href="#" style={styles.links} className="nav-link">Portfolio</a>
+            <a href="#" style={styles.links} className="nav-link">Skills</a>
+            <a href="#" style={styles.links} className="nav-link">Contact</a>
         </nav>
     );
 });

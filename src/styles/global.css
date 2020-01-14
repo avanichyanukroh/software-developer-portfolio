@@ -4,6 +4,10 @@ html {
 	text-rendering: optimizeLegibility;
 }
 
+a {
+    text-decoration: none;
+}
+
 .gradient-background-0 {
 	position: fixed;
 	top: 0;
@@ -76,6 +80,10 @@ html {
 	-moz-animation-name: fadeIn;
 	animation-name: fadeIn;
 
+
+}
+
+.fadeInDelay {
 	-webkit-animation-delay: 0.5s;
 	-moz-animation-delay: 0.5s;
 	animation-delay: 0.5s;
@@ -94,9 +102,9 @@ html {
 	-moz-animation-name: fadeOut;
 	animation-name: fadeOut;
 
-	-webkit-animation-delay: 0.1s;
+	/* -webkit-animation-delay: 0.1s;
 	-moz-animation-delay: 0.1s;
-	animation-delay: 0.1s;
+	animation-delay: 0.1s; */
 }
 
  .growIn {
@@ -338,16 +346,16 @@ html {
 
 .slideIn {
     -webkit-animation: slideIn 0.5s forwards;
-    -webkit-animation-delay: 0.5s;
+    -webkit-animation-delay: 0.1s;
     animation: slideIn 0.5s forwards;
-    animation-delay: 0.5s;
+    animation-delay: 0.1s;
 }
 
 .slideOut {
     -webkit-animation: slideOut 0.5s backwards;
-    -webkit-animation-delay: 2s;
+    /* -webkit-animation-delay: 0.5s; */
     animation: slideOut 0.5s backwards;
-    animation-delay: 0.5s;
+    /* animation-delay: 0.5s; */
 }
 
 @-webkit-keyframes slideIn {
@@ -382,13 +390,10 @@ html {
 
 .icon {
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    transform: scale(0.3);
     width: 80px;
     height: 60px;
     cursor: pointer;
-    transform: scale(0.3);
   }
   
   .arrow {
